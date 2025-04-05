@@ -1,21 +1,18 @@
 package org.security.soringsecurityproject.controllers;
 
-import org.springframework.web.bind.annotation.RestController;
 
-@RestController
-public class StudentController {
+public class Student {
 
     private int id;
     private String firstName;
     private int note;
 
-    public StudentController(int id, String firstName, int note) {
+    public Student(int id, String firstName, int note) {
         this.id = id;
         this.firstName = firstName;
         this.note = note;
     }
 
-    
 
     public int getId() {
         return id;
