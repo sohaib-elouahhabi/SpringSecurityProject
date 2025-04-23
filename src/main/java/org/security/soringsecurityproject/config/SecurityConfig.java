@@ -1,6 +1,7 @@
 package org.security.soringsecurityproject.config;
 
 
+import org.security.soringsecurityproject.enums.Role;
 import org.security.soringsecurityproject.filters.JwtFilter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -36,7 +37,9 @@ public class SecurityConfig {
                 .authorizeHttpRequests(request ->request
                         .requestMatchers("register" , "login")
                         .permitAll()
-                        .anyRequest().authenticated())
+                        .requestMatchers("students").hasAnyAuthority(Role.ADMIN.name())
+                        .anyRequest()
+                        .authenticated())
                 .httpBasic(Customizer.withDefaults())
                 .sessionManagement(session -> session
                         .sessionCreationPolicy(SessionCreationPolicy.STATELESS))
