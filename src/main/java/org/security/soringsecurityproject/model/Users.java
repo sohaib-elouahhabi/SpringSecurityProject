@@ -1,7 +1,10 @@
 package org.security.soringsecurityproject.model;
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.Id;
+import org.security.soringsecurityproject.enums.Role;
 
 @Entity
 public class Users {
@@ -10,6 +13,16 @@ public class Users {
     private int id;
     private String username;
     private String password;
+    @Enumerated(EnumType.STRING)
+    private Role role;
+
+    public Role getRole() {
+        return role;
+    }
+
+    public void setRole(Role role) {
+        this.role = role;
+    }
 
     public int getId() {
         return id;
@@ -41,6 +54,7 @@ public class Users {
                 "id=" + id +
                 ", username='" + username + '\'' +
                 ", password='" + password + '\'' +
+                ", role='" + role + '\'' +
                 '}';
     }
 }

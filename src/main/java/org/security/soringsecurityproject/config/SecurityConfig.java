@@ -36,13 +36,14 @@ public class SecurityConfig {
                 .authorizeHttpRequests(request ->request
                         .requestMatchers("register" , "login")
                         .permitAll()
-                        .anyRequest().authenticated())
-//                .httpBasic(Customizer.withDefaults())
-                .formLogin(Customizer.withDefaults())
+                        .requestMatchers("students").hasAnyAuthority(Role.ADMIN.name())
+                        .anyRequest()
+                        .authenticated())
+                .httpBasic(Customizer.withDefaults())
                 .oauth2Login(Customizer.withDefaults())
-//                .sessionManagement(session -> session
-//                        .sessionCreationPolicy(SessionCreationPolicy.STATELESS))
-//                .addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class)
+                .sessionManagement(session -> session
+                        .sessionCreationPolicy(SessionCreationPolicy.STATELESS))
+                .addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class)
                 .build();
     }
 
