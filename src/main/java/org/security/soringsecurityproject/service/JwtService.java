@@ -8,6 +8,8 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 import javax.crypto.SecretKey;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
@@ -27,7 +29,7 @@ public class JwtService {
                 .add(claims)
                 .subject(username)
                 .issuedAt(new Date(System.currentTimeMillis()))
-                .expiration(new Date(System.currentTimeMillis() + 60 * 60 * 10))
+                .expiration(expirationByHours())
                 .and()
                 .signWith(getKey())
                 .compact();
@@ -68,6 +70,12 @@ public class JwtService {
         return extractClaim(token,Claims::getExpiration);
     }
 
+    private Date expirationByHours() {
+        return Date.from(LocalDateTime.now()
+                .plusHours(3)
+                .atZone(ZoneId.systemDefault())
+                .toInstant());
+    }
 
     //    public JwtService() {
 //        try {

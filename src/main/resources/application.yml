@@ -1,0 +1,10 @@
+spring:
+  application:
+    name: SoringSecurityProject
+  datasource:
+    url: jdbc:postgresql://localhost:5432/postgres
+    username: postgres
+    password: 1234
+
+jwt:
+  secret: PqBDPkZ0unMRfpBCwNHqeRlgv21rXh3sKU5KE3nvtRs=
